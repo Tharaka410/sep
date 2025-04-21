@@ -77,7 +77,7 @@ def save_checkpoint_per_nth(nth, epoch, model, optimizer, train_loss, valid_loss
         # Log and save the checkpoint file using wandb
         wandb_run.save(os.path.join(checkpoint_path, f"epoch.{epoch:04}.pth"))
 
-def save_checkpoint_per_best(best, valid_loss, train_loss, epoch, model, optimizer, checkpoint_path):
+def save_checkpoint_per_best(best, valid_loss, train_loss, epoch, model, optimizer, checkpoint_path, wandb_run):
     """
     Save the state of the model and optimizer every nth epoch to a checkpoint file.
     Additionally, log and save the checkpoint file using wandb.
