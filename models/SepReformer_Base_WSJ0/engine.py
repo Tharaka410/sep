@@ -167,10 +167,12 @@ class Engine(object):
             nnet_input = mixture_padded.to(self.device)
             estim_src, _ = torch.nn.parallel.data_parallel(self.model, nnet_input, device_ids=self.gpuid)
             mixture = torch.squeeze(mixture).cpu().numpy()
-            sf.write(sample[:-4]+'_in.wav', 0.9*mixture/max(abs(mixture)), self.fs)
+            output_path = os.path.join('/kaggle/working', os.path.basename(sample)[:-4] + '_in.wav')
+            sf.write(output_path, 0.9 * mixture / max(abs(mixture)), self.fs)
             for i in range(self.config['model']['num_spks']):
                 src = torch.squeeze(estim_src[i][...,:mixture.shape[-1]]).cpu().data.numpy()
-                sf.write(sample[:-4]+'_out_'+str(i)+'.wav', 0.9*src/max(abs(src)), self.fs)
+                output_path = os.path.join('/kaggle/working', os.path.basename(sample)[:-4] + '_in.wav')
+                sf.write(output_path, 0.9 * mixture / max(abs(mixture)), self.fs)
 
     
     @logger_wraps()
