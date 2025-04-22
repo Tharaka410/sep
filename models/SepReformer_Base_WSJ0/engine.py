@@ -214,6 +214,6 @@ class Engine(object):
                     writer_src.add_scalars("Metrics", {
                         'Loss_train_time': train_loss_src_time, 
                         'Loss_valid_time': valid_loss_src_time}, epoch)
-                    writer_src.add_scalars("Learning Rate", self.main_optimizer.param_groups[0]['lr'], epoch)
+                    writer_src.add_scalars("Learning Rate", {"lr": self.main_optimizer.param_groups[0]['lr']}, epoch)
                     writer_src.flush()
                 logger.info(f"Training for {self.config['engine']['max_epoch']} epoches done!")
